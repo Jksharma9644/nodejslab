@@ -1,0 +1,41 @@
+{
+  "name": "ecommerceadminapi",
+  "version": "1.0.0",
+  "description": "Ecommerce API ",
+  "engines": {
+    "node": "7.10.0"
+  },
+  "main": "server.js",
+  "scripts": {
+    "test": "node",
+    "start": "node server.js"
+  },
+  "author": "Jay Sharma",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "crypto-js": "^3.1.9-1",
+    "email-verification": "^0.4.6",
+    "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.1",
+    "lodash": "^4.17.4",
+    "mongodb": "^2.2.33",
+    "mongoose": "^5.0.1",
+    "nodemailer": "^4.6.0",
+    "nodemailer-express-handlebars": "^2.0.0",
+    "validator": "^9.3.0"
+  },
+  "devDependencies": {
+    "expect": "^22.0.3",
+    "mocha": "^4.1.0",
+    "nodemon": "^1.14.7",
+    "supertest": "^3.0.0"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ]
+}
