@@ -71,7 +71,7 @@ app.use(function(req, res) {
 });
 
 
-app.listen(port, '0.0.0.0', function(err) {
+app.listen(port, function(err) {
     console.log("Started listening on %s", app.url);
   });
 
