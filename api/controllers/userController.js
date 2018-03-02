@@ -43,7 +43,7 @@ exports.sign_up = function (req, res, next) {
                         pass: "rutherford"
                     }
                 });
-                var mailOptions = { from: 'jaycareer1989@gmail.com', to: user.email, subject: 'Account Verification Token', text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + 'localhost:4200/auth/activated/' + token.token + '.\n' };
+                var mailOptions = { from: 'jaycareer1989@gmail.com', to: user.email, subject: 'Account Verification Token', text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + 'https://ecommerce-app.000webhostapp.com/auth/activated/' + token.token + '.\n' };
                 transporter.sendMail(mailOptions, function (err) {
                     if (err) { return res.status(500).send({ msg: err.message }); }
                     res.status(200).send('A verification email has been sent to ' + user.email + '.');

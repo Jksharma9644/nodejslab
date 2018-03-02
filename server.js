@@ -1,6 +1,6 @@
 'use strict';
 
-require('./server/config/config');
+// require('./server/config/config');
 var express = require('express'),
   app = express(),
   port = process.env.PORT || 3000,
