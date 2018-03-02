@@ -39,7 +39,7 @@ var express = require('express'),
 
 
 // route files
-app.route('/auth/regitser')
+app.route('/auth/register')
     .post(userHandler.sign_up);
 app.route('/auth/sign_in')
     .post(userHandler.sign_in);
