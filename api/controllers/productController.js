@@ -39,14 +39,14 @@ exports.AddProduct = function(req,res){
 }
 
 exports.productList =function (req, res) {
-    var response = {};
-    Products.find({is_deleted:false},function (err, data) {
-        // Mongo command to fetch all data from collection.
-        if (err) {
-            response = { "error": true, "message": err };
-        } else {
-            response = { "error": false, "message": "success" ,"data": data };
-        }
+    var response = {error:"test message`"};
+    // Products.find({is_deleted:false},function (err, data) {
+    //     // Mongo command to fetch all data from collection.
+    //     if (err) {
+    //         response = { "error": true, "message": err };
+    //     } else {
+    //         response = { "error": false, "message": "success" ,"data": data };
+    //     }
         res.json(response);
-    });
+    // });
 }
