@@ -71,10 +71,10 @@ app.use(function(req, res) {
 });
 
 
-app.listen(port, function(err) {
-    console.log("Started listening on %s", app.url);
-  });
-
-console.log('todo list RESTful API server started on: ' + port);
+var server = app.listen(process.env.PORT || 3000, function () {
+    var port = server.address().port;
+    console.log("Express is working on port " + port);
+});
+// console.log('todo list RESTful API server started on: ' + port);
 
 module.exports = app;
