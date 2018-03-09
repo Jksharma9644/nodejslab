@@ -1,11 +1,11 @@
 'use strict';
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://13.127.233.100:27017/test');
-var jsonwebToken = require('jsonwebtoken'),
-    bcrypt = require('bcrypt'),
-    User = mongoose.model('User'),
-    Token = mongoose.model('Token'),
-    Admin = mongoose.model('Admin');
+var jsonwebToken = require('jsonwebtoken');
+var bcrypt = require('bcrypt');
+var User = mongoose.model('User');
+var Token = mongoose.model('Token');
+var Admin = mongoose.model('Admin');
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
 
