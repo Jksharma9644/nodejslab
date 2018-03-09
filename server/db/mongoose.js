@@ -3,7 +3,5 @@ var mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 mongoose.set('debug',true);
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/User');
-
-
+mongoose.connect('mongodb://13.127.233.100:27017/test');
 module.exports = {mongoose};

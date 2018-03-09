@@ -65,12 +65,12 @@ exports.sign_in = function (req, res) {
             res.status(401).json({ message: 'Authentication Failed .user Not found' })
         } else if (user) {
             if (!user.comparePassword(req.body.password)) {
-                res.status(401).json({ message: 'Authentication Failed Wrong password' })
+                res.status(200).send( 'Authentication Failed Wrong password' )
             } else {
                 if(!user.isVerified){
-                    res.status(401).json({ message: 'Your account has not been verified.' })
+                    res.status(200).send('Your account has not been verified.' )
                 }
-                return res.json({ status: true, token: jsonwebToken.sign({ email: user.email, name: user.name, _id: user._id }, 'RESTFULAPIs'), email: user.email, name: user.name, user_id: user._id })
+                return res.json({ status: true, email: user.email, name: user.name, user_id: user._id })
             }
         }
     });  
