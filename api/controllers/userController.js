@@ -1,7 +1,7 @@
 'use strict';
-// var mongoose = require('mongoose'),
-var { mongoose } = require('../../server/db/mongoose'),
-    jsonwebToken = require('jsonwebtoken'),
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://13.127.233.100:27017/test');
+var jsonwebToken = require('jsonwebtoken'),
     bcrypt = require('bcrypt'),
     User = mongoose.model('User'),
     Token = mongoose.model('Token'),
@@ -21,7 +21,7 @@ exports.sign_up = function (req, res, next) {
 
     User.findOne({ email: req.body.email }, function (err, user) {
         // Make sure user doesn't already exist
-        if (user) return res.status(200).send('The email You have Enteered is already Registered' );
+        if (user) return res.status(200).send('The email You have Enteered is already Registered');
         // Create and save the user
         user = new User({ name: req.body.name, email: req.body.email, password: req.body.password });
         user.password = bcrypt.hashSync(req.body.password, 10);
@@ -65,24 +65,24 @@ exports.sign_in = function (req, res) {
             res.status(401).json({ message: 'Authentication Failed .user Not found' })
         } else if (user) {
             if (!user.comparePassword(req.body.password)) {
-                res.status(200).send( 'Authentication Failed Wrong password' )
+                res.status(200).send('Authentication Failed Wrong password')
             } else {
-                if(!user.isVerified){
-                    res.status(200).send('Your account has not been verified.' )
+                if (!user.isVerified) {
+                    res.status(200).send('Your account has not been verified.')
                 }
                 return res.json({ status: true, email: user.email, name: user.name, user_id: user._id })
             }
         }
-    });  
+    });
 };
 exports.confirmationPost = function (req, res) {
     Token.findOne({ token: req.body.token }, function (err, token) {
         if (!token) return res.status(200).send("We were unable to find a valid token. Your token my have expired");
-     
+
         // If we found a token, find a matching user
         User.findOne({ _id: token._userId }, function (err, user) {
             if (!user) return res.status(200).send("We were unable to find a user for this token");
-          
+
             if (user.isVerified) return res.status(200).send("this user has already verified Please login");
 
             // Verify and save the user
@@ -96,18 +96,18 @@ exports.confirmationPost = function (req, res) {
 };
 
 /********************Resend Token*************/
-exports.resend = function(req,res){
+exports.resend = function (req, res) {
     User.findOne({ email: req.body.email }, function (err, user) {
         if (!user) return res.status(400).send({ msg: 'We were unable to find a user with that email.' });
         if (user.isVerified) return res.status(400).send({ msg: 'This account has already been verified. Please log in.' });
- 
+
         // Create a verification token, save it, and send email
         var token = new Token({ _userId: user._id, token: crypto.randomBytes(16).toString('hex') });
- 
+
         // Save the token
         token.save(function (err) {
             if (err) { return res.status(500).send({ msg: err.message }); }
- 
+
             // Send the email
             var transporter = nodemailer.createTransport({
                 service: "Gmail",
@@ -122,7 +122,7 @@ exports.resend = function(req,res){
                 res.status(200).send('A verification email has been sent to ' + user.email + '.');
             });
         });
- 
+
     });
 }
 
@@ -139,7 +139,7 @@ exports.loginRequired = function (req, res) {
 
 /*****************Admin login and Registraion**********/
 
-exports.adminSignup=function(req,res){
+exports.adminSignup = function (req, res) {
     Admin.findOne({ email: req.body.email }, function (err, user) {
         // Make sure user doesn't already exist
         if (user) return res.status(400).send({ msg: 'The email You have Enteered is already Registered' });
@@ -149,12 +149,12 @@ exports.adminSignup=function(req,res){
         user.save(function (err) {
             if (err) { return res.status(500).send({ msg: err.message }); }
             // Create a verification token for this user
-           return  res.status(200).json({token: jsonwebToken.sign({ email: user.email, name: user.name, _id: user._id }, 'RESTFULAPIs'), email: user.email, name: user.name, user_id: user._id })
+            return res.status(200).json({ token: jsonwebToken.sign({ email: user.email, name: user.name, _id: user._id }, 'RESTFULAPIs'), email: user.email, name: user.name, user_id: user._id })
         })
 
     })
 }
-exports.adminSignin=function(req,res){
+exports.adminSignin = function (req, res) {
     Admin.findOne({
         email: req.body.email
     }, function (err, user) {
@@ -168,6 +168,6 @@ exports.adminSignin=function(req,res){
                 return res.json({ status: true, token: jsonwebToken.sign({ email: user.email, name: user.name, _id: user._id }, 'RESTFULAPIs'), email: user.email, name: user.name, user_id: user._id })
             }
         }
-    });  
+    });
 }
 
