@@ -1,6 +1,6 @@
 'use strict';
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://13.127.233.100:27017/test');
+mongoose.connect('mongodb://13.127.217.153:27017/test');
 var jsonwebToken = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
 var User = mongoose.model('User');
@@ -40,7 +40,7 @@ exports.sign_up = function (req, res, next) {
                     service: "Gmail",
                     auth: {
                         user: "jaycareer1989@gmail.com",
-                        pass: "rutherford"
+                        pass: "zxcvbnm7330"
                     }
                 });
                 var mailOptions = { from: 'jaycareer1989@gmail.com', to: user.email, subject: 'Account Verification Token', text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + 'localhost:4200/auth/activated/' + token.token + '.\n' };
