@@ -1,6 +1,6 @@
 'use strict';
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://13.127.56.24:27017/test');
+// mongoose.connect('mongodb://13.127.56.24:27017/test');
 var jsonwebToken = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
 var User = mongoose.model('User');
